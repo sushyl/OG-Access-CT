@@ -1,0 +1,15 @@
+<?php
+/**
+ * @file
+ *
+ * Code for updating weight of module over og_access module.
+ */
+
+function og_access_ct_install(){
+$weight = db_result(db_query("SELECT weight FROM {system} WHERE name = 'og_access'"));
+db_query("UPDATE {system} SET weight = %d WHERE name = 'og_access_ct'", $weight + 1);
+}
+
+function og_access_ct_uninstall() {
+  // Remove tables.
+}
