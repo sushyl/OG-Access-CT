@@ -18,7 +18,9 @@ function og_access_ct_menu() {
   return $items;
 }
 
-
+/**
+ * OG access Settings.
+ */
 function og_access_ct_settings() {
   $node_types = array_keys(node_get_types('names'));
   foreach ($node_types as $key => $value) {
@@ -63,4 +65,3 @@ function og_access_ct_form_alter(&$form, &$form_state, $form_id) {
         );
     }
 }
-
