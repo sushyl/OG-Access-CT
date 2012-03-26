@@ -5,7 +5,7 @@
  */
 
 /**
- * Implementats hook_menu().
+ * Implements hook_menu().
  */
 function og_access_ct_menu() {
   $items['admin/og/og_access_ct'] = array(
