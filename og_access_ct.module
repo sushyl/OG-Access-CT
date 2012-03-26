@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- *  Creates settings for making content private/public based on content type 
+ *  Creates settings for making content private/public based on content type
  */
 
 /**
@@ -24,11 +24,11 @@ function og_access_ct_menu() {
 function og_access_ct_settings() {
   $node_types = array_keys(node_get_types('names'));
   foreach ($node_types as $key => $value) {
-    if(!og_is_group_post_type($value)){
+    if (!og_is_group_post_type($value)) {
       unset($node_types[$key]);
     }
   }
-  
+
   foreach ($node_types as $key => $type) {
     $options = array(
       t('Visibility chosen by author/editor using a checkbox on the posting form <strong>@type</strong>. Checkbox defaults to <em>private</em>.', array('@type' => $type)),
@@ -42,7 +42,7 @@ function og_access_ct_settings() {
     );
   }
     $form['desc'] = array(
-    '#value' => t('Determine how broadly available a given post should be when it is affiliated with a group. OG admins always see the checkbox for making a post public. Note that changing this setting has no effect on existing posts. Re-save those posts to acquire this new setting. If the setting you want is disabled here, check the settings under <em>Private Groups</em> setting below. You cannot set node visibility to always be public if private groups are set to always on and vice versa.'). t('Note that the privacy of all <em>content</em> in the group is determined as each node is created or edited, according to the <em>Visibility of Posts</em> setting on this page. Note also that changing this setting only affects the default for new groups being created, not the privacy of any existing groups! To change those you must edit the groups and their individual content nodes directly. If the setting you want is disabled here, check <em>Visibility of Posts</em> above. You cannot choose to only have private groups if node visibility is set to be always public, and vice versa.')
+    '#value' => t('Determine how broadly available a given post should be when it is affiliated with a group. OG admins always see the checkbox for making a post public. Note that changing this setting has no effect on existing posts. Re-save those posts to acquire this new setting. If the setting you want is disabled here, check the settings under <em>Private Groups</em> setting below. You cannot set node visibility to always be public if private groups are set to always on and vice versa.') . t('Note that the privacy of all <em>content</em> in the group is determined as each node is created or edited, according to the <em>Visibility of Posts</em> setting on this page. Note also that changing this setting only affects the default for new groups being created, not the privacy of any existing groups! To change those you must edit the groups and their individual content nodes directly. If the setting you want is disabled here, check <em>Visibility of Posts</em> above. You cannot choose to only have private groups if node visibility is set to be always public, and vice versa.')
     );
   return system_settings_form($form);
 }
@@ -52,16 +52,16 @@ function og_access_ct_settings() {
  */
 
 function og_access_ct_form_alter(&$form, &$form_state, $form_id) {
-  
+
   if (isset($form['#node']) && $form_id == $form['#node']->type .'_node_form') {
-   $node = $form['#node'];
-   $og_vis_type = 'og_visibility_' . $node->type;
-        $form['og_nodeapi']['visible']['og_public'] = array(
-          '#type' => 'checkbox',
-          '#title' => t('Public'),
-          '#default_value' =>  isset($node->og_public) ? $node->og_public : variable_get($og_vis_type) ,
-          '#description' => t('Show this post to everyone, or only to members of the groups checked above. Posts without any groups are always <em>public</em>.'),
-          '#weight' => 2,
-        );
+    $node = $form['#node'];
+    $og_vis_type = 'og_visibility_' . $node->type;
+      $form['og_nodeapi']['visible']['og_public'] = array(
+        '#type' => 'checkbox',
+        '#title' => t('Public'),
+        '#default_value' =>  isset($node->og_public) ? $node->og_public : variable_get($og_vis_type) ,
+        '#description' => t('Show this post to everyone, or only to members of the groups checked above. Posts without any groups are always <em>public</em>.'),
+        '#weight' => 2,
+      );
     }
 }

@@ -1,15 +1,20 @@
 <?php
 /**
  * @file
- *
- * Code for updating weight of module over og_access module.
+ * Install, update, and uninstall functions for the OG Access CT module.
  */
 
-function og_access_ct_install(){
+/**
+ * Implementation of hook_install().
+ */
+function og_access_ct_install() {
 $weight = db_result(db_query("SELECT weight FROM {system} WHERE name = 'og_access'"));
 db_query("UPDATE {system} SET weight = %d WHERE name = 'og_access_ct'", $weight + 1);
 }
 
+/**
+ * Implementation of hook_uninstall().
+ */
 function og_access_ct_uninstall() {
   // Remove tables.
 }
