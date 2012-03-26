@@ -1,6 +1,0 @@
-name = OG Access per Content types
-description = OG Access configurations per Content type.
-dependencies[] = og
-dependencies[] = og_access
-core = 6.x
-package = Organic Groups
